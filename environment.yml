@@ -1,0 +1,32 @@
+name: htocsp
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9.13
+  - parmed=4.0.0
+  - openmm=8.0.0
+  - openbabel=3.1.1
+  - openff-forcefields=2023.04.1
+  - openff-toolkit=0.14.3
+  - openff-models=0.0.4 
+  - openff-units=0.2.0
+  - openff-utilities=0.1.8
+  - openff-interchange=0.3.18
+  - toml=0.10.2
+  - xmltodict=0.13.0
+  #Dev tools at github commit
+  - pip:
+    - pyxtal==1.0.0
+    - pyocse==0.1.0
+    - git+https://github.com/ACEsuit/mace@main
+    - lammps==2023.8.2.2.0
+    - torch-dftd==0.4.0
+    - torchani
+    - seaborn
+  - black
+  - flake8
+  - isort
+  - pre-commit
+  - pytest
+  - pytest-cov
+  - pdoc3
