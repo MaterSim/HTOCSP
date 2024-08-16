@@ -1,6 +1,7 @@
 # HTOCSP
 
-This is a public repository that aims to automate the high-throughput organic crystals prediction by integrating various existing tools such as PyXtal, OST, RDKit, AmberTools, and CHARMM. The current stable version is HTOSCP-v1.0.0
+This is a public repository that aims to automate the high-throughput organic crystals prediction by integrating various existing tools such as [PyXtal](https://github.com/MaterSim/PyXtal), [pyocse](https://github.com/MaterSim/pyocse), [RDKit](https://www.rdkit.org), [AmberTools](https://ambermd.org/AmberTools.php), and [CHARMM](https://academiccharmm.org). 
+<!-- The current stable version is HTOSCP-v1.0.0 -->
 
 ## Python Setup
 git clone this repository and then go to the root directory

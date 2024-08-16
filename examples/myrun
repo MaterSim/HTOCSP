@@ -2,7 +2,7 @@
 #SBATCH --partition=Apus
 #SBATCH -J htocsp-test
 #SBATCH --nodes=2
-#SBATCH --ntasks-per-node=32
+#SBATCH --ntasks-per-node=96
 #SBATCH --time=4:00:00
 export OMP_NUM_THREADS=1
 
@@ -11,14 +11,12 @@ echo "Running on node: $(hostname)"
 
 MODEL=$SLURM_JOB_NAME
 
-CMD1="python 0-aspirin-simple.py     > log-0 #2>/dev/null"
-CMD2="python 1-aspirin-bt.py         > log-1 #2>/dev/null"
-CMD3="python 2-aspirin-validation.py > log-2 #2>/dev/null"
-CMD4="python 3-aspirin-pxrd.py       > log-3 #2>/dev/null"
+CMD0="python 0-aspirin-simple.py    -p 192 -n 192 -a WFS > log-0 #2>/dev/null"
+CMD1="python 1-aspirin-bt.py        -p 192 -n 192 -a DFS > log-1 #2>/dev/null"
+CMD2="python 2-aspirin-pxrd.py      -p 192 -n 192 -a WFS > log-2 #2>/dev/null"
 echo "===============================BEGIN==============================="
+echo $CMD0 && eval $CMD0
 echo $CMD1 && eval $CMD1
 echo $CMD2 && eval $CMD2
-echo $CMD3 && eval $CMD3
-echo $CMD4 && eval $CMD4
 echo "===============================DONE==============================="
 

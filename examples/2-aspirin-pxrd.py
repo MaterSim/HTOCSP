@@ -1,10 +1,12 @@
 """
-This is an example to perform CSP based on the reference crystal.
+This is an example to perform CSP based on the reference PXRD.
+To use this function, one needs to provide a reference PXRD
+in a 2D array arranged as (2theta, intensity).
 The structures with good matches will be output to *-matched.cif.
 """
+import numpy as np
 from time import time
-from pyxtal.optimize import WFS, DFS
-from pyxtal.representation import representation
+from pyxtal.optimize import WFS, DFS, QRS
 import argparse
 
 if __name__ == "__main__":
@@ -20,16 +22,16 @@ if __name__ == "__main__":
                       help="algorithm, default: WFS")
 
     options = parser.parse_args()
-    smiles, sg, wdir = "CC(=O)OC1=CC=CC=C1C(=O)O", [14], "aspirin-simple"
-    
-    # Reconstruct the reference structure
-    x = "81 11.38  6.48 11.24  96.9 1 0 0.23 0.43 0.03  -44.6   25.0   34.4  -76.6   -5.2  171.5 0"
-    rep = representation.from_string(x, [smiles])
-    xtal = rep.to_pyxtal()
-    
-    # Sampling
-    t0 = time()
+    smiles, sg, wdir = "CC(=O)OC1=CC=CC=C1C(=O)O", [14], "aspirin-pxrd"
+
+    # Read the reference PXRD and normalize the intensity
+    data = np.loadtxt('data/ref_pxrd.txt')
+    data[:, 1] /= np.max(data[:, 1])
+    ref_pxrd = (data[:, 0], data[:, 1])
+
+    # Sampling methods
     fun = globals().get(options.algo)
+    t0 = time()
     go = fun(smiles,
              wdir,
              sg,
@@ -37,9 +39,11 @@ if __name__ == "__main__":
              N_gen = options.gen,
              N_pop = options.pop,
              N_cpu = options.ncpu,
-             ff_style = 'gaff',
-            )
-    go.run(ref_pmg=xtal.to_pymatgen())
-    go.print_matches(header='Ref_match')
-    go.plot_results()
-    print(f"Elapsed time: {(time()-t0)/60:.2f} minutes")
+             ff_style = 'openFF')
+    
+    go.run(ref_pxrd=ref_pxrd)
+    header = f'XRD-{go.name:3s}-{go.ff_style:<6s}'
+    go.print_matches(header=header, pxrd=True)
+    go.plot_results(pxrd=True)
+    t = (time()-t0)/60
+    print(f"Elapsed time: {t:.2f} minutes")
