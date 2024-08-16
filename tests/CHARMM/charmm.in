@@ -1,0 +1,71 @@
+! Automated Charmm calculation
+
+bomlev -1
+! top and par
+read rtf card name pyxtal.rtf
+read para card name pyxtal.prm
+Read sequence card
+    1
+U00 
+generate main first none last none setup warn
+Read coor card free
+* Residues coordinate
+*
+   21
+    1    1 U00  C      0.86279   0.17582   0.61653
+    2    1 U00  C1     0.83286   0.27099   0.56606
+    3    1 U00  O      0.90364   0.28211   0.53357
+    4    1 U00  O1     0.73606   0.34732   0.55165
+    5    1 U00  C2     0.71383   0.43534   0.50303
+    6    1 U00  C3     0.67761   0.31544   0.46091
+    7    1 U00  C4     0.65469   0.39610   0.41218
+    8    1 U00  C5     0.66851   0.60668   0.40503
+    9    1 U00  C6     0.70411   0.73296   0.44525
+   10    1 U00  C7     0.72566   0.64199   0.49318
+   11    1 U00  C8     0.76356   0.76636   0.53741
+   12    1 U00  O2     0.78315   0.68308   0.58106
+   13    1 U00  O3     0.78114   0.97566   0.53655
+   14    1 U00  H      0.85741   0.00767   0.61158
+   15    1 U00  H1     0.94314   0.20939   0.63025
+   16    1 U00  H2     0.81084   0.21434   0.64793
+   17    1 U00  H3     0.66780   0.15304   0.46781
+   18    1 U00  H4     0.62702   0.29109   0.38190
+   19    1 U00  H5     0.64986   0.66427   0.36653
+   20    1 U00  H6     0.71475   0.89597   0.43960
+   21    1 U00  H7     0.75320   1.07140   0.56450
+write psf card name aspirin-g0-p0pyxtal.psf
+write coor crd card name aspirin-g0-p0pyxtal.crd
+read psf card name aspirin-g0-p0pyxtal.psf
+read coor card name aspirin-g0-p0pyxtal.crd
+
+! crystal parameters
+set shape monoclinic
+set a        13.020175
+set b         6.515176
+set c        25.666153
+set alpha    90.000000
+set beta     93.135584
+set gamma    90.000000
+coor conv FRAC SYMM @a @b @c @alpha @beta @gamma
+coor stat select all end
+Crystal Define @shape @a @b @c @alpha @beta @gamma
+Crystal Build cutoff 14.0 noperations 3
+(-x-1/2, y+1/2, -z-1/2)
+(-x, -y, -z)
+(x-1/2, -y+1/2, z-1/2)
+image byres xcen ?xave ycen ?yave zcen ?zave sele resn LIG end
+set 7 fswitch
+set 8 atom
+set 9 vatom
+Update inbfrq 10 imgfrq 10 ihbfrq 10 -
+ewald pmewald lrc fftx 32 ffty 32 fftz 32 -
+kappa 0.34 order 6 CTOFNB 12.0 CUTNB 14.0 QCOR 1.0 -
+@7 @8 @9 vfswitch !
+mini abnr nstep 1000
+coor conv SYMM FRAC ?xtla ?xtlb ?xtlc ?xtlalpha ?xtlbeta ?xtlgamma
+
+write coor pdb name aspirin-g0-p0result.pdb
+*CELL :  ?xtla  ?xtlb  ?xtlc ?xtlalpha ?xtlbeta ?xtlgamma
+*Z = 4
+*Energy(kcal): ?ener
+stop
