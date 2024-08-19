@@ -41,6 +41,24 @@ Similarly, you can specify the options as follows.
 ```
 python 2-aspirin-pxrd.py -g 20 -p 256 -n 128 -a WFS > log-2 #2>/dev/null"
 ```
+### `3-benchmark.py`
+This is an example to systematically benchmark the sampling performance for a set of 100 systems as described in the paper. For a complete benchmark, run it like the following
+
+```
+python 3-benchmark.py -g 500 -p 192 -n 192 -a WFS"        #WFS-GAFF
+```
+or
+```
+"python 3-benchmark.py -g 500 -p 192 -n 192 -a WFS --ani"  #WFS-GAFF-ANI
+```
+
+However, it would take a very long time to consider all 100 systems. 
+For a quick test, run it as
+```
+python 3-benchmark.py -g 20 -p 192 -n 192 -a WFS -c FLUANT
+```
+This will just run one system called `FLUANT` with 20 generations.
+
 
 ## How to run it on the HPC nodes??
 
@@ -61,18 +79,21 @@ echo "Running on node: $(hostname)"
 CMD0="python 0-aspirin-simple.py -g 20 -p 192 -n 192 -a WFS > log-0 #2>/dev/null"
 CMD1="python 1-aspirin-bt.py     -g 20 -p 192 -n 192 -a DFS > log-1 #2>/dev/null"
 CMD2="python 2-aspirin-pxrd.py   -g 20 -p 192 -n 192 -a WFS > log-2 #2>/dev/null"
+CMD3="python 3-benchmark.py -p 192 -n 192 -a WFS -g 20 -c FLUANT > log-3 #2>/dev/null"
 echo "===============================BEGIN==============================="
-echo $CMD1 && eval $CMD0
-echo $CMD2 && eval $CMD1
-echo $CMD3 && eval $CMD2
+echo $CMD0 && eval $CMD0
+echo $CMD1 && eval $CMD1
+echo $CMD2 && eval $CMD2
+echo $CMD3 && eval $CMD3
 echo "===============================DONE==============================="
 
 ```
 
 Below is a summary of time usage for each run.
 
-| Nodes-CPU | Commands                                             | RunTime (minutes) |
-|-----------|------------------------------------------------------|-------------------|
-| 2 \* 96   | python 0-aspirin-simple.py -g 20 -p 192 -n 192 -a WFS|   7.64            |
-| 2 \* 96   | python 1-aspirin-bt.py     -g 20 -p 192 -n 192 -a DFS|   6.93            |
-| 2 \* 96   | python 2-aspirin-pxrd.py   -g 20 -p 192 -n 192 -a WFS|   8.50            |
+| Nodes-CPU | Commands                                                  | RunTime (minutes) |
+|-----------|-----------------------------------------------------------|-------------------|
+| 2 \* 96   | python 0-aspirin-simple.py -g 20 -p 192 -n 192 -a WFS     |   7.64            |
+| 2 \* 96   | python 1-aspirin-bt.py     -g 20 -p 192 -n 192 -a DFS     |   6.93            |
+| 2 \* 96   | python 2-aspirin-pxrd.py   -g 20 -p 192 -n 192 -a WFS     |   8.50            |
+| 2 \* 96   | python 3-benchmark.py -g 20 -p 192 -n 192 -a WFS -c FLUANT|   4.80            |

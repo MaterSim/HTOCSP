@@ -11,12 +11,14 @@ echo "Running on node: $(hostname)"
 
 MODEL=$SLURM_JOB_NAME
 
-CMD0="python 0-aspirin-simple.py    -p 192 -n 192 -a WFS > log-0 #2>/dev/null"
-CMD1="python 1-aspirin-bt.py        -p 192 -n 192 -a DFS > log-1 #2>/dev/null"
-CMD2="python 2-aspirin-pxrd.py      -p 192 -n 192 -a WFS > log-2 #2>/dev/null"
+CMD0="python 0-aspirin-simple.py -p 192 -n 192 -a WFS > log-0 #2>/dev/null"
+CMD1="python 1-aspirin-bt.py     -p 192 -n 192 -a DFS > log-1 #2>/dev/null"
+CMD2="python 2-aspirin-pxrd.py   -p 192 -n 192 -a WFS > log-2 #2>/dev/null"
+CMD3="python 3-benchmark.py -p 192 -n 192 -a WFS -g 20 -c FLUANT > log-3 #2>/dev/null"
 echo "===============================BEGIN==============================="
 echo $CMD0 && eval $CMD0
 echo $CMD1 && eval $CMD1
 echo $CMD2 && eval $CMD2
+#echo $CMD3 && eval $CMD3
 echo "===============================DONE==============================="
 
