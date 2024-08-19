@@ -111,6 +111,24 @@ In this example, the structure ended with `2500.000` means an invalid structure.
 
 Please ref to the [examples](https://github.com/MaterSim/HTOCSP/tree/main/examples) folder to run more productive examples.
 
+## Citation
+Zhu Q, Hattori S. (2024). 
+[Automated High-throughput Organic Crystal Structure Prediction via Population-based Sampling](https://arxiv.org/abs/2408.08843)
+
+
+```bib
+@misc{zhu2024-htocsp,
+      title={Automated High-throughput Organic Crystal Structure Prediction via Population-based Sampling}, 
+      author={Qiang Zhu and Shinnosuke Hattori},
+      year={2024},
+      eprint={2408.08843},
+      archivePrefix={arXiv},
+      primaryClass={cond-mat.mtrl-sci},
+      doi={https://doi.org/10.48550/arXiv.2408.08843},
+      url={https://arxiv.org/abs/2408.08843},
+}
+```
+
 ## Contacts:
 
 - Qiang Zhu (qzhu8@uncc.edu)
