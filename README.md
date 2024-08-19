@@ -22,12 +22,15 @@ mamba env update --file environment.yml
 ## CHARMM Setup
 One can request a [free academic version of CHARMM](https://brooks.chem.lsa.umich.edu/register/) and then install it via the following commands.
 *Note, make sure you compile charmm with the simplest option with qchem, openmm, quantum and colfft.*
+
 ```
 $ ./configure --without-mpi --without-qchem --without-openmm --without-quantum --without-colfft -p ~/CHARMM
 $ make -j 8
 $ make install
 ```
+
 After a few minutes, you should see the following messages
+
 ```
 [  0%] Built target charmm_c
 [ 99%] Built target charmm_fortran
@@ -38,12 +41,15 @@ Install the project...
      Installing into $HOME/CHARMM
 -- Up-to-date: $HOME/CHARMM/bin/charmm
 ```
+
 Then add the path of `charmm` executable to your `.bashrc` file and source it.
+
 ```
 export PATH=$HOME/CHARMM/bin:$PATH
 ```
 
 To check if the installation is successful, go to `/HTOCSP/tests/CHARMM` and run the example:
+
 ```
 $ charmm < charmm.in
 
@@ -54,6 +60,7 @@ $ charmm < charmm.in
                      ELAPSED TIME:     2.44  SECONDS
                          CPU TIME:     2.40  SECONDS
 ```
+
 You should see quickly see the output of `NORMAL TERMINATION`. 
 
 
@@ -75,7 +82,9 @@ go = WFS(smiles="CC(=O)OC1=CC=CC=C1C(=O)O",
         )
 go.run()
 ```
+
 The output should look like the following
+
 ```
 Method    : Stochastic Width First Sampling
 Generation:    2
@@ -104,6 +113,7 @@ Generation 1 finishes: 8 strucs
   1  81 18.70  6.76 16.85 112.9 1 0 0.54 0.84 0.65  -61.9   62.4   -1.3   85.8    1.1    3.2 0     -77.307 Random   Top
 Gen  1 time usage:  44.2[Calc]   0.0[Proc]
 ```
+
 In this example, the structure ended with `2500.000` means an invalid structure. Make sure you don't see all structures ends up with `2500.000`.
 
 
