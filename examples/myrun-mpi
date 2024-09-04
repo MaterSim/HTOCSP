@@ -1,0 +1,27 @@
+#!/bin/sh -l
+#SBATCH --partition=Apus
+#SBATCH -J htocsp-test
+#SBATCH --nodes=2             #Change here
+#SBATCH --ntasks-per-node=1   #Change here
+#SBATCH --cpus-per-task=96    #Change here
+#SBATCH --time=4:00:00
+#SBATCH --mem=96G
+export OMP_NUM_THREADS=1
+
+# This is an example to use mutliple nodes on HPC 
+# You must have installed mpi4py in your htocsp env to use this function
+
+echo "Running on node: $(hostname)"
+NCPU=$SLURM_CPUS_PER_TASK
+BASE="srun --mpi=pmix_v3 python"
+ARGS=" -g 20 -p 192 -n ${NCPU}"
+
+CMD0="${BASE} 0-aspirin-simple.py ${ARGS} -a WFS > log-mpi-0 #2>/dev/null"
+CMD1="${BASE} 1-aspirin-bt.py     ${ARGS} -a DFS > log-mpi-1 #2>/dev/null"
+CMD2="${BASE} 2-aspirin-pxrd.py   ${ARGS} -a WFS > log-mpi-2 #2>/dev/null"
+CMD3="${BASE} 3-benchmark.py      ${ARGS} -a WFS -c FLUANT > log-mpi-3 #2>/dev/null"
+echo "===============================BEGIN==============================="
+echo $CMD0 && eval $CMD0
+echo $CMD1 && eval $CMD1
+echo $CMD2 && eval $CMD2
+echo $CMD3 && eval $CMD3

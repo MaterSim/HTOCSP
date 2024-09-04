@@ -1,24 +1,24 @@
 #!/bin/sh -l
 #SBATCH --partition=Apus
-#SBATCH -J htocsp-test
-#SBATCH --nodes=2
-#SBATCH --ntasks-per-node=96
-#SBATCH --time=4:00:00
+#SBATCH -J htocsp
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=96
+#SBATCH --mem=96G     
+#SBATCH --time=2:00:00
 export OMP_NUM_THREADS=1
 
 # Print the hostname of the node executing this job
 echo "Running on node: $(hostname)"
 
-MODEL=$SLURM_JOB_NAME
-
-CMD0="python 0-aspirin-simple.py -p 192 -n 192 -a WFS > log-0 #2>/dev/null"
-CMD1="python 1-aspirin-bt.py     -p 192 -n 192 -a DFS > log-1 #2>/dev/null"
-CMD2="python 2-aspirin-pxrd.py   -p 192 -n 192 -a WFS > log-2 #2>/dev/null"
-CMD3="python 3-benchmark.py -p 192 -n 192 -a WFS -g 20 -c FLUANT > log-3 #2>/dev/null"
+CMD0="python 0-aspirin-simple.py -p 192 -n 192 -a WFS > log-mproc-0 #2>/dev/null"
+CMD1="python 1-aspirin-bt.py     -p 192 -n 192 -a DFS > log-mproc-1 #2>/dev/null"
+CMD2="python 2-aspirin-pxrd.py   -p 192 -n 192 -a WFS > log-mproc-2 #2>/dev/null"
+CMD3="python 3-benchmark.py -p 192 -n 192 -a WFS -g 20 -c FLUANT > log-mproc-3 #2>/dev/null"
 echo "===============================BEGIN==============================="
 echo $CMD0 && eval $CMD0
 echo $CMD1 && eval $CMD1
 echo $CMD2 && eval $CMD2
-#echo $CMD3 && eval $CMD3
+echo $CMD3 && eval $CMD3
 echo "===============================DONE==============================="
 

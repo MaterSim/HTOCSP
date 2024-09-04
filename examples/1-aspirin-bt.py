@@ -1,9 +1,11 @@
 """
 This is an simple example to perform CSP under blind test condition.
 """
-from time import time
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module='torchani.aev')
 from pyxtal.optimize import WFS, DFS
 import argparse
+import os
 
 if __name__ == "__main__":
 
@@ -20,8 +22,10 @@ if __name__ == "__main__":
     options = parser.parse_args()
     smiles, sg, wdir = "CC(=O)OC1=CC=CC=C1C(=O)O", [2, 4, 7, 14, 19], "aspirin-blindtest"
 
+    # Check if use_mpi is invoked
+    use_mpi = "OMPI_COMM_WORLD_SIZE" in os.environ or "SLURM_MPI_TYPE" in os.environ
+
     # Sampling
-    t0 = time()
     fun = globals().get(options.algo)
     go = fun(smiles,
              wdir,
@@ -31,7 +35,7 @@ if __name__ == "__main__":
              N_pop = options.pop,
              N_cpu = options.ncpu,
              ff_style = 'gaff',
+             use_mpi = use_mpi,
             )
     go.run()
     go.plot_results()
-    print(f"Elapsed time: {(time()-t0)/60:.2f} minutes")

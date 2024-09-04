@@ -2,15 +2,21 @@
 #SBATCH --partition=Apus
 #SBATCH -J htocsp-test
 #SBATCH --nodes=2
-#SBATCH --ntasks-per-node=96
-#SBATCH --time=96:00:00
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=96    #Change here
+#SBATCH --time=8:00:00
+#SBATCH --mem=96G
 export OMP_NUM_THREADS=1
 
 # Print the hostname of the node executing this job
 echo "Running on node: $(hostname)"
-MODEL=$SLURM_JOB_NAME
+NCPU=$SLURM_CPUS_PER_TASK
+BASE="srun --mpi=pmix_v3 python"
+ARGS=" -g 20 -p 192 -n ${NCPU} -d ../data/benchmark.db " #-c KONTIQ"
 
-python ../3-benchmark.py -p 192 -n 192 -a DFS -g 500 -d ../data/benchmark.db > log-DFS-GAFF 2>/dev/null
+CMD="${BASE} ../3-benchmark.py ${ARGS} -a WFS > log-mpi-WFS-GAFF #2>/dev/null"
+echo $CMD && eval $CMD
+#python ../3-benchmark.py -p 192 -n 192 -a DFS -g 500 -d ../data/benchmark.db > log-DFS-GAFF 2>/dev/null
 #python ../3-benchmark.py -p 192 -n 192 -a WFS -g 500 -d ../data/benchmark.db > log-WFS-GAFF 2>/dev/null
 #python ../3-benchmark.py -p 192 -n 192 -a DFS -g 500 -d ../data/benchmark.db --ANI > log-DFS-GAFF-ANI 2>/dev/null
 #python ../3-benchmark.py -p 192 -n 192 -a WFS -g 500 -d ../data/benchmark.db --ANI > log-WFS-GAFF-ANI 2>/dev/null

@@ -5,9 +5,9 @@ in a 2D array arranged as (2theta, intensity).
 The structures with good matches will be output to *-matched.cif.
 """
 import numpy as np
-from time import time
 from pyxtal.optimize import WFS, DFS, QRS
 import argparse
+import os
 
 if __name__ == "__main__":
 
@@ -29,9 +29,11 @@ if __name__ == "__main__":
     data[:, 1] /= np.max(data[:, 1])
     ref_pxrd = (data[:, 0], data[:, 1])
 
+    # Check if use_mpi is invoked
+    use_mpi = "OMPI_COMM_WORLD_SIZE" in os.environ or "SLURM_MPI_TYPE" in os.environ
+
     # Sampling methods
     fun = globals().get(options.algo)
-    t0 = time()
     go = fun(smiles,
              wdir,
              sg,
@@ -39,11 +41,10 @@ if __name__ == "__main__":
              N_gen = options.gen,
              N_pop = options.pop,
              N_cpu = options.ncpu,
-             ff_style = 'openFF')
+             ff_style = 'openFF',
+             use_mpi = use_mpi)
     
     go.run(ref_pxrd=ref_pxrd)
     header = f'XRD-{go.name:3s}-{go.ff_style:<6s}'
     go.print_matches(header=header, pxrd=True)
-    go.plot_results(pxrd=True)
-    t = (time()-t0)/60
-    print(f"Elapsed time: {t:.2f} minutes")
+    go.plot_results()
