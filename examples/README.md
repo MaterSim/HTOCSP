@@ -59,6 +59,13 @@ python 3-benchmark.py -g 20 -p 192 -n 192 -a WFS -c FLUANT
 ```
 This will just run one system called `FLUANT` with 20 generations.
 
+### `4-preopt-xxv.py`
+This is an example to explore the use of pre_opt option that can preoptimize the randomly built crystal based on `optimize_lattice_rotation` function.
+
+```
+python 4-preopt-xxv.py > log-4-xxv
+```
+
 
 ## How to run it on the HPC nodes??
 

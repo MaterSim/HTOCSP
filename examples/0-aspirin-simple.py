@@ -2,10 +2,9 @@
 This is an example to perform CSP based on the reference crystal.
 The structures with good matches will be output to *-matched.cif.
 """
-import warnings
-warnings.filterwarnings("ignore", category=UserWarning, module='torchani.aev')
 from pyxtal.optimize import WFS, DFS, QRS
 from pyxtal.representation import representation
+from pyxtal.molecule import pyxtal_molecule
 import argparse
 import os
 
@@ -19,6 +18,9 @@ if __name__ == "__main__":
                       help="cpu number, default: 1")
     parser.add_argument("-a", "--algo", dest="algo", default='WFS',
                       help="algorithm, default: WFS")
+    parser.add_argument("--preopt", dest='preopt', action='store_true',
+                      help="preoptimize the lattice and rotation")
+
     options = parser.parse_args()
     smiles, sg, wdir = "CC(=O)OC1=CC=CC=C1C(=O)O", [14], "aspirin-simple"
     # Reconstruct the reference structure
@@ -26,9 +28,7 @@ if __name__ == "__main__":
     rep = representation.from_string(x, [smiles])
     xtal = rep.to_pyxtal()
     pmg = xtal.to_pymatgen()
-
-    # Check if use_mpi is invoked
-    use_mpi = "OMPI_COMM_WORLD_SIZE" in os.environ or "SLURM_MPI_TYPE" in os.environ
+    m1 = pyxtal_molecule('CC(=O)OC1=CC=CC=C1C(=O)O.smi', active_sites=[[11], [12], [20]])
 
     # Sampling
     fun = globals().get(options.algo)
@@ -40,7 +40,8 @@ if __name__ == "__main__":
              N_pop = options.pop,
              N_cpu = options.ncpu,
              ff_style = 'gaff',
-             use_mpi = use_mpi)
+             molecules = [[m1]] if options.preopt else None,
+             pre_opt = options.preopt)
 
     go.run(ref_pmg=pmg)
     go.print_matches(header='Ref_match')
