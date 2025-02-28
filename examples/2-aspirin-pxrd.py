@@ -43,8 +43,8 @@ if __name__ == "__main__":
              N_cpu = options.ncpu,
              ff_style = 'openFF',
              use_mpi = use_mpi)
-    
+
     go.run(ref_pxrd=ref_pxrd)
     header = f'XRD-{go.name:3s}-{go.ff_style:<6s}'
-    go.print_matches(header=header, pxrd=True)
+    go.print_matches(header=header)
     go.plot_results()
