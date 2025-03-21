@@ -11,15 +11,19 @@ import os
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-g", "--gen", dest="gen", type=int, default=1,
-                      help="Number of generation, default: 5")
+                        help="Number of generation, default: 5")
     parser.add_argument("-p", "--pop", dest="pop", type=int, default=10,
-                      help="Population size, default: 10")
+                        help="Population size, default: 10")
     parser.add_argument("-n", "--ncpu", dest="ncpu", type=int, default=1,
-                      help="cpu number, default: 1")
+                        help="cpu number, default: 1")
     parser.add_argument("-a", "--algo", dest="algo", default='WFS',
-                      help="algorithm, default: WFS")
+                        help="algorithm, default: WFS")
     parser.add_argument("--preopt", dest='preopt', action='store_true',
-                      help="preoptimize the lattice and rotation")
+                        help="preoptimize the lattice and rotation")
+    parser.add_argument("--parameters", dest='parameters', default="parameters.xml",
+                        help="forcefield parameter xml file, default: parameters.xml")
+    parser.add_argument("--ffstyle", dest='ffstyle', default='gaff',
+                        help="forcefield style, default: gaff")
 
     options = parser.parse_args()
     smiles, sg, wdir = "CC(=O)OC1=CC=CC=C1C(=O)O", [14], "aspirin-simple"
@@ -39,7 +43,8 @@ if __name__ == "__main__":
              N_gen = options.gen,
              N_pop = options.pop,
              N_cpu = options.ncpu,
-             ff_style = 'gaff',
+             ff_style = options.ffstyle,
+             ff_parameters = options.parameters,
              molecules = [[m1]] if options.preopt else None,
              pre_opt = options.preopt)
 
