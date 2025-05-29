@@ -128,14 +128,16 @@ Zhu Q, Hattori S. (2024).
 
 ```bib
 @misc{zhu2024-htocsp,
-      title={Automated High-throughput Organic Crystal Structure Prediction via Population-based Sampling}, 
-      author={Qiang Zhu and Shinnosuke Hattori},
-      year={2024},
-      eprint={2408.08843},
-      archivePrefix={arXiv},
-      primaryClass={cond-mat.mtrl-sci},
-      doi={https://doi.org/10.48550/arXiv.2408.08843},
-      url={https://arxiv.org/abs/2408.08843},
+  title={Automated high-throughput organic crystal structure prediction via population-based sampling},
+  author={Zhu, Qiang and Hattori, Shinnosuke},
+  journal={Digital Discovery},
+  volume={4},
+  number={1},
+  pages={120--134},
+  year={2025},
+  publisher={Royal Society of Chemistry},
+  doi={10.1039/D4DD00264D},
+  url={https://doi.org/10.1039/D4DD00264D},
 }
 ```
 
