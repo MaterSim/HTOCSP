@@ -1,0 +1,15 @@
+#!/bin/sh -l
+#SBATCH -A mat230046
+#SBATCH -p wholenode 
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=128 
+#SBATCH --time=48:00:00
+#SBATCH --mem-per-cpu=1G
+export OMP_NUM_THREADS=1
+
+# Print the hostname of the node executing this job
+echo "Running on node: $(hostname)"
+NCPU=$SLURM_CPUS_PER_TASK
+python blind_test.py -a DFS -p 256 -n ${NCPU} -g 2000 -c ${SLURM_JOB_NAME} > log-${SLURM_JOB_NAME}
+#python blind_test.py -a WFS -p 256 -n ${NCPU} -g 2000 -c ${SLURM_JOB_NAME} --check > log-${SLURM_JOB_NAME}
