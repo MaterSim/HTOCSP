@@ -1,0 +1,26 @@
+Energy_eV_per_mol,Density,SpaceGroup,Label,Method,Energy_kJ_per_mol
+-394.592,1.448,82,dense_Experimental,MACE,-38072.20912
+-394.589,1.444,1,Matched_dense,MACE,-38071.919665
+-394.676,1.259,86,porous_Experimental,MACE,-38080.31386
+-394.686,1.296,7,Matched_porous,MACE,-38081.27871
+-394.693,1.289,2,Global Minimum,MACE,-38081.954105
+-46812.82,1.436,82,dense_Experimental,MACEOFF,-4516734.9377
+-46812.81,1.429,1,Matched_dense,MACEOFF,-4516733.97285
+-46812.7,1.245,86,porous_Experimental,MACEOFF,-4516723.359499999
+-46812.72,1.301,7,Matched_porous,MACEOFF,-4516725.2892
+-46812.77,1.282,2,Global Minimum,MACEOFF,-4516730.11345
+-393.84,1.451,82,dense_Experimental,DFT,-37999.6524
+-393.842,1.449,1,Matched_dense,DFT,-37999.845369999995
+-393.67,1.295,86,porous_Experimental,DFT,-37983.249950000005
+-393.68,1.29,7,Matched_porous,DFT,-37984.2148
+-393.686,1.301,2,Global Minimum,DFT,-37984.79371
+-393.948,1.434,82,dense_Experimental,UMA,-38010.072779999995
+-393.943,1.414,1,Matched_dense,UMA,-38009.590355
+-393.762,1.239,86,porous_Experimental,UMA,-37992.12657
+-393.749,1.281,7,Matched_porous,UMA,-37990.872265000005
+-393.789,1.271,2,Global Minimum,UMA,-37994.731665
+-372.537,1.4,82,dense_Experimental,LATTE
+-372.550,1.4,1,Matched_dense,LATTE
+-372.234,1.2,86,porous_Experimental,LATTE
+-372.233,1.2,7,Matched_porous,LATTE
+-372.229,1.3,2,Global Minimum,LATTE
