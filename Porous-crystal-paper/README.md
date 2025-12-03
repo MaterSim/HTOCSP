@@ -51,11 +51,16 @@ Note: Some computations may be time-consuming depending on your hardware.
 
 ```bibtex
 @misc{zhu2024-htocsp,
-  title = {Structure Prediction of Porous Organic Crystals},
-  author = {Musiha Mahfuza Mukta and Romain Perriot and Shinnosuke Hattori and Wei Zhou and Qiang Zhu},
-  year = {2024},
-  note = {Manuscript / preprint},
-  url = {https://github.com/mmukta/HTOCSP}
+  title={Structure Prediction of Porous Organic Crystals},
+  author={Musiha Mahfuza Mukta,a Romain Perriot,b Shinnosuke Hattori,c‡ Wei Zhou,d‡ and Qiang Zhu},
+  journal={XXXXX},
+  volume={XXX},
+  number={XXX},
+  pages={XXX--XXX},
+  year={202X},
+  publisher={XXXX},
+  doi={XXXXX},
+  url={XXXXXXXX},
 }
 ```
 
