@@ -1,62 +1,69 @@
-# HTOCSP
-# Reproducing the Figures
-This folder contains all scripts and data required to reproduce the four figures presented in our paper. Each figure has its own folder containing the Python script and the corresponding `.csv` files.
+## HTOCSP — Porous Organic Crystal Structure Prediction
 
-## Requirements
-Make sure you have Python installed. The following Python packages are required:
-- numpy
-- pandas
-- matplotlib
+This folder contains the scripts and data used to reproduce the figures from the paper "Structure Prediction of Porous Organic Crystals". Each figure has its own subfolder with the Python script that generates the figure and any supporting CSV/data files.
 
-You can install them with:
+## Prerequisites
+
+- Python 3.8+ (use the project's environment file for exact dependencies).
+- Create the conda environment from the repository root:
+
 ```bash
-pip install numpy pandas matplotlib
+conda env create -f ../environment.yml -n htocsp
+conda activate htocsp
 ```
-## How to Generate the Figures
-**Figure 1**  
-Navigate to the `Fig1-molecule` folder and run:
+
+If you prefer pip/venv, inspect `environment.yml` for the required packages.
+
+## Reproducing the figures
+
+Run the commands below from the `Porous-crystal-paper` directory (or adjust paths if running from the repo root).
+
+Figure 1 — Molecule visualization
+
 ```bash
 cd Fig1-molecule
 python Fig1-molecule.py
 ```
-**Figure 2**
-For the search based on the known space-group symmetry, go to 'Fig2-known_spg' and run:
+
+Figure 2 — Search using the known space-group symmetry
+
 ```bash
 cd Fig2-known_spg
 python Fig2.py
 ```
-**Figure 3**
-For the search using 23 common space-group symmetries, go to 'Fig3-common_spg' and run:
+
+Figure 3 — Search using 23 common space-group symmetries
+
 ```bash
 cd Fig3-common_spg
 python Fig3.py
 ```
-**Figure 4**
-For the energy ranking comparison across methods, go to Fig4-Ranking' and run:
+
+Figure 4 — Energy ranking comparison across methods
+
 ```bash
 cd Fig4-Ranking
 python Fig4.py
 ```
 
-```bib
+Note: Some computations may be time-consuming depending on your hardware.
+
+
+```bibtex
 @misc{zhu2024-htocsp,
-  title={Structure Prediction of Porous Organic Crystals},
-  author={Musiha Mahfuza Mukta,a Romain Perriot,b Shinnosuke Hattori,c‡ Wei Zhou,d‡ and Qiang Zhu},
-  journal={XXXXX},
-  volume={XXX},
-  number={XXX},
-  pages={XXX--XXX},
-  year={202X},
-  publisher={XXXX},
-  doi={XXXXX},
-  url={XXXXXXXX},
+  title = {Structure Prediction of Porous Organic Crystals},
+  author = {Musiha Mahfuza Mukta and Romain Perriot and Shinnosuke Hattori and Wei Zhou and Qiang Zhu},
+  year = {2024},
+  note = {Manuscript / preprint},
+  url = {https://github.com/mmukta/HTOCSP}
 }
 ```
 
-## Contacts:
+## Contacts
 
-- Qiang Zhu (qzhu8@charlotte.edu)
-- Shinnosuke Hattori (shinnosuke.hattori@sony.com)
-- Wei Zhou (wei.zhou@nist.gov)
+- Qiang Zhu — qzhu8@charlotte.edu
+- Shinnosuke Hattori — shinnosuke.hattori@sony.com
+- Wei Zhou — wei.zhou@nist.gov
+
 
 
