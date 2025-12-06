@@ -25,6 +25,12 @@ conda activate htocsp
 mamba env update --file environment.yml
 ```
 
+## MACE Setup
+To add
+
+## UMA Setup
+To add
+
 ## CHARMM Setup
 One can request a [free academic version of CHARMM](https://brooks.chem.lsa.umich.edu/register/) and then install it via the following commands.
 *Note, make sure you compile charmm with the simplest option with qchem, openmm, quantum and colfft.*
