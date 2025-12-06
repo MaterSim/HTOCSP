@@ -7,9 +7,15 @@ This is a public repository that aims to automate the high-throughput organic cr
 git clone this repository and then go to the root directory
 
 ```
-conda install -c conda-forge mamba
-mamba env create -n htocsp 
+conba env create -n htocsp 
 conda activate htocsp
+```
+
+or UMA
+```
+conba env create -n htocsp-uma -f environment_UMA.yml
+conda activate htocsp-uma
+`
 ```
 
 *If you want to update the existing ost enviroment*
@@ -24,7 +30,9 @@ One can request a [free academic version of CHARMM](https://brooks.chem.lsa.umic
 *Note, make sure you compile charmm with the simplest option with qchem, openmm, quantum and colfft.*
 
 ```
-$ ./configure --without-mpi --without-qchem --without-openmm --without-quantum --without-colfft -p ~/CHARMM
+$ ./configure --without-mpi --without-qchem --without-openmm --without-quantum --without-colfft \
+    -D CMAKE_DISABLE_FIND_PACKAGE_OpenMP=TRUE \
+    -p ~/CHARMM
 $ make -j 8
 $ make install
 ```
