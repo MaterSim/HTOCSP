@@ -7,13 +7,13 @@ This is a public repository that aims to automate the high-throughput organic cr
 git clone this repository and then go to the root directory
 
 ```
-conba env create -n htocsp 
+conda env create -n htocsp 
 conda activate htocsp
 ```
 
 or UMA
 ```
-conba env create -n htocsp-uma -f environment_UMA.yml
+conda env create -n htocsp-uma -f environment_UMA.yml
 conda activate htocsp-uma
 `
 ```
