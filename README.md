@@ -25,12 +25,6 @@ conda activate htocsp
 mamba env update --file environment.yml
 ```
 
-## MACE Setup
-To add
-
-## UMA Setup
-To add
-
 ## CHARMM Setup
 One can request a [free academic version of CHARMM](https://brooks.chem.lsa.umich.edu/register/) and then install it via the following commands.
 *Note, make sure you compile charmm with the simplest option with qchem, openmm, quantum and colfft.*
@@ -77,6 +71,27 @@ $ charmm < charmm.in
 
 You should see quickly see the output of `NORMAL TERMINATION`. 
 
+## MACE Setup
+
+MACE setup does not require any additional installation beyond what is already included in the main `htocsp` environment. No extra configuration is needed—simply ensure you have completed the **Python Setup** and **CHARMM Setup** sections above.
+
+## UMA Setup
+
+Create the UMA environment from the `environment_UMA.yml` file.
+
+### HuggingFace Token Login
+
+This UMA workflow requires access to models hosted on [HuggingFace](https://huggingface.co), you'll need to authenticate with a HuggingFace token. Generate or retrieve your token from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) and then log in:
+
+```bash
+conda activate htocsp-uma
+python - << 'EOF'
+from huggingface_hub import login
+login(token="YOUR_TOKEN_HERE")
+EOF
+```
+
+Replace `YOUR_TOKEN_HERE` with your actual HuggingFace API token. This will store your credentials locally for future use.
 
 ## Quick Test 
 
